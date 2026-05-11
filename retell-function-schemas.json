@@ -1,0 +1,32 @@
+{
+  "check_room_availability": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/check-room-availability",
+    "description": "Checks if a room is available and returns move-in cost."
+  },
+  "get_rules": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/get-rules",
+    "description": "Returns house rules."
+  },
+  "create_stripe_checkout": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/create-stripe-checkout",
+    "description": "Creates a Stripe Checkout payment link."
+  },
+  "get_next_step_links": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/get-next-step-links",
+    "description": "Returns payment, booking, and contract links."
+  },
+  "send_links": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/send-links",
+    "description": "Emails links if SMTP is configured."
+  },
+  "send_owner_summary": {
+    "method": "POST",
+    "url": "https://YOUR-RAILWAY-APP.up.railway.app/api/retell/send-owner-summary",
+    "description": "Sends or logs owner summary."
+  }
+}

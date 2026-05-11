@@ -1,0 +1,20 @@
+{
+  "name": "retell-sober-living-demo",
+  "version": "1.0.0",
+  "description": "Railway-ready backend for Retell AI + Stripe Checkout + Cal.com + DocuSign demo.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.16",
+    "stripe": "^17.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
