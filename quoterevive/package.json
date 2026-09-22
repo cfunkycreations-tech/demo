@@ -1,0 +1,14 @@
+{
+  "name": "quoterevive",
+  "version": "0.1.0",
+  "description": "QuoteRevive \u2014 find the money hiding in your inbox. Dead quotes, unpaid invoices, and ghosted threads, ranked by recoverable dollars.",
+  "type": "module",
+  "scripts": {
+    "check": "node --check jev-client.js && node --check session.js && node --check license-store.js && node --check inbox-store.js && node --check quote-classify.js && node --check quote-store.js && node --check server.js && node --check public/app.js && echo 'syntax OK'",
+    "dev": "node server.js",
+    "test": "node test-quotes.mjs"
+  },
+  "dependencies": {
+    "imapflow": "^2.0.5"
+  }
+}

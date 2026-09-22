@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoteRevive — the money hiding in your inbox</title>
+  <meta name="description" content="QuoteRevive reads your inbox, finds dead quotes, unpaid invoices, and ghosted threads, and ranks them by recoverable dollars — with the follow-up drafted for you." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><span class="logo-mark">◈</span> QuoteRevive</div>
+      <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#dashboard" class="btn btn-small btn-primary">Find my money</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Powered by TypeSafe AI&rsquo;s Jev model</p>
+          <h1>There&rsquo;s money hiding<br />in your inbox.</h1>
+          <p class="lede">
+            Dead quotes. Unpaid invoices. Threads that went quiet right before
+            the close. QuoteRevive finds every one, ranks them by recoverable
+            dollars, and drafts the follow-up for you.
+          </p>
+          <div class="hero-cta">
+            <a href="#dashboard" class="btn btn-primary btn-large">Find my money</a>
+            <a href="#how" class="btn btn-ghost btn-large">How it works</a>
+          </div>
+          <ul class="hero-points">
+            <li><strong>Ranked by dollars.</strong> Your pipeline sorted by expected recoverable value.</li>
+            <li><strong>Knows why they stalled.</strong> Price, timing, shopping around — each with a tailored nudge.</li>
+            <li><strong>Never sends without you.</strong> Drafts only. You review, you send.</li>
+          </ul>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="mock-card">
+            <p class="mock-title">Recoverable pipeline</p>
+            <p class="mock-pipeline">$127,400</p>
+            <div class="mock-row"><span class="badge cat-quote">Dead quote</span><span class="mock-val">$18,500</span></div>
+            <div class="mock-row"><span class="badge cat-invoice">Unpaid invoice</span><span class="mock-val">$4,200</span></div>
+            <div class="mock-row"><span class="badge cat-ghost">Ghosted thread</span><span class="mock-val">est. ?</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DASHBOARD ── -->
+    <section id="dashboard" class="section">
+      <div class="container">
+        <h2>Your dashboard</h2>
+
+        <div class="pipeline-hero">
+          <div>
+            <p class="pipeline-label">Recoverable pipeline</p>
+            <p class="pipeline-number" id="pipelineNumber">$0</p>
+            <p class="pipeline-sub" id="pipelineSub">Connect your inbox and run a scan.</p>
+          </div>
+          <div class="pipeline-actions">
+            <button class="btn btn-primary" id="scanBtn">Run scan</button>
+            <div class="scan-progress" id="scanProgress" hidden>
+              <div class="scan-bar"><div class="scan-fill" id="scanFill"></div></div>
+              <p class="scan-text" id="scanText"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <!-- inbox connect -->
+          <div class="panel" id="inboxPanel">
+            <h3>Connect your inbox</h3>
+            <div class="presets" id="providerPresets">
+              <button type="button" data-host="imap.gmail.com" data-port="993" class="preset active">Gmail</button>
+              <button type="button" data-host="outlook.office365.com" data-port="993" class="preset">Outlook</button>
+              <button type="button" data-host="imap.mail.yahoo.com" data-port="993" class="preset">Yahoo</button>
+              <button type="button" data-host="imap.mail.me.com" data-port="993" class="preset">iCloud</button>
+              <button type="button" data-host="" data-port="993" class="preset">Custom</button>
+            </div>
+            <label>IMAP host <input id="imapHost" value="imap.gmail.com" autocomplete="off" /></label>
+            <label>Port <input id="imapPort" value="993" inputmode="numeric" /></label>
+            <label>Email / username <input id="imapUser" type="email" placeholder="you@yourbusiness.com" autocomplete="email" /></label>
+            <label>App-specific password <input id="imapPass" type="password" placeholder="••••••••••••••••" autocomplete="new-password" /></label>
+            <p class="hint">Gmail/Outlook need an <em>app-specific password</em>, not your login password. Your password is encrypted before it's stored and never logged.</p>
+            <div class="row">
+              <button class="btn btn-primary" id="connectBtn">Connect</button>
+              <button class="btn btn-ghost" id="disconnectBtn" hidden>Disconnect</button>
+            </div>
+            <p class="status-line" id="inboxStatus"></p>
+          </div>
+
+          <!-- license -->
+          <div class="panel" id="licensePanel">
+            <h3>License</h3>
+            <p class="tier-line">Plan: <strong id="tierName">Free</strong></p>
+            <p class="hint" id="tierHint">Free shows your top 3 deals + totals. Pro unlocks everything.</p>
+            <label>Pro license key <input id="licenseKey" placeholder="XXXX-XXXX-XXXX" autocomplete="off" /></label>
+            <div class="row">
+              <button class="btn btn-primary" id="activateBtn">Activate Pro</button>
+              <a class="btn btn-ghost" id="buyBtn" href="#" target="_blank" rel="noopener">Get Pro — $29/mo</a>
+            </div>
+            <p class="status-line" id="licenseStatus"></p>
+          </div>
+        </div>
+
+        <!-- cards -->
+        <div class="cards-head">
+          <h3>Deals to revive</h3>
+          <p class="hint" id="cardsHint"></p>
+        </div>
+        <div class="cards" id="cards"></div>
+        <div class="locked-banner" id="lockedBanner" hidden>
+          <p><strong id="lockedCount"></strong> more deals are waiting. <a href="#pricing">Go Pro</a> to unlock the full ranked list.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section id="how" class="section section-alt">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step"><p class="step-n">1</p><h3>Connect once</h3><p>Link your inbox with an app-specific password. It's encrypted on day one and never logged.</p></div>
+          <div class="step"><p class="step-n">2</p><h3>We find the stalled money</h3><p>AI reads 90 days of threads and flags dead quotes, unpaid invoices, and ghosted conversations — ranked by recoverable dollars.</p></div>
+          <div class="step"><p class="step-n">3</p><h3>You nudge, you close</h3><p>Every card has a tailored follow-up drafted. Copy it, tweak it, send it. We never email anyone for you.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2>Pricing</h2>
+        <div class="price-grid">
+          <div class="price-card">
+            <h3>Free</h3>
+            <p class="price">$0</p>
+            <ul>
+              <li>Full inbox scan</li>
+              <li>Top 3 deals + pipeline total</li>
+              <li>Follow-up drafts</li>
+            </ul>
+            <a href="#dashboard" class="btn btn-ghost">Start free</a>
+          </div>
+          <div class="price-card featured">
+            <h3>Pro</h3>
+            <p class="price">$29<span>/mo</span></p>
+            <ul>
+              <li>Everything in Free</li>
+              <li>Full ranked list — every deal</li>
+              <li>Deeper 90-day backfill</li>
+              <li>Ongoing newly-dead detection</li>
+              <li>Win/loss learning per stall reason</li>
+            </ul>
+            <a href="#" class="btn btn-primary" id="buyBtn2" target="_blank" rel="noopener">Get Pro</a>
+          </div>
+        </div>
+        <p class="hint center">One revived deal pays for years of Pro.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><span class="logo-mark">◈</span> QuoteRevive — stop leaving money in your inbox.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
