@@ -9,6 +9,31 @@ Stack: Node.js 22 (ES modules, zero build step), `imapflow` for IMAP, TypeSafe
 Jev for classification, Gumroad for licensing. Dark premium dashboard,
 single-page frontend in `public/`.
 
+## Changelog
+
+### v2 — 2026-09-22
+- **Sent-folder discovery added.** v1 read INBOX only, so `sentByUser` was false
+  for every message and the directionality guard demoted every card:
+  `QUOTE_SENT` and `INVOICE_UNPAID` were unreachable in production. Sent is now
+  found via the `\Sent` special-use flag with name fallbacks; a mailbox without
+  one is refused at connect. Message cache keyed `folder + uid`; UIDVALIDITY
+  tracked per folder.
+- **Identity is a signed HttpOnly session cookie**, not the client IP. A forged
+  `X-Forwarded-For` previously returned any user's pipeline and could move their
+  stored IMAP credentials to an attacker's licence key.
+- **`GET /%` no longer kills the process** (unguarded `decodeURIComponent`);
+  added `uncaughtException` / `unhandledRejection` guards.
+- **Live Jev mode fixed** — mock and live now share one `normalizeAnswer()`.
+  Live previously returned `NOT_MONEY` with recoverability 0 for every thread.
+- **One request per thread** instead of one per question (~4x less spend and
+  latency); Pro budget charges the real question count.
+- **Model pinned** to `jev-1.13.0`; `jev-latest` is a moving alias.
+- **Test harness rebuilt so it can fail:** fake IMAP models two folders with
+  independent, colliding UID spaces. 21 tests → 34.
+
+### v1
+- Initial MVP. 21 tests, green — against a mailbox that cannot exist.
+
 ## Quick start
 
 ```bash
